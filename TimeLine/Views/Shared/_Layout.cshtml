@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html lang="de-DE" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>时钟——时间轴</title>
+    <link rel='stylesheet' href='~/Content/history.css' type='text/css' media='all' />
+
+    @*<script type="text/javascript" src="~/Scripts/jquery.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/lodash.js"></script>
+        <script type="text/javascript" src="~/Scripts/TweenMax.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/DrawSVGPlugin.js"></script>
+        <script type="text/javascript" src="~/Scripts/namespaces.js"></script>*@
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script type="text/javascript">
+        function preload_images(images, functions) {
+            if (typeof functions === 'undefined') functions = {};
+            var loaded = 0;
+            console.log("1111");
+            for (var i = 0; i < images.length; i++) {
+                ////console.log('preload '+images[i]);
+                var img = new Image();
+                img.onload = img.onerror = function () {
+                    ////console.log(img.src + ' loaded');
+                    var onImgParams = {
+                        //img : img,
+                        //index : i,
+                        loadedPct: (loaded / images.length)
+                    };
+                    if (_.isFunction(functions.onImgLoad)) functions.onImgLoad(onImgParams);
+
+                    loaded++;
+                    if (loaded >= images.length && _.isFunction(functions.onAllImgsLoaded)) {
+                        ////console.log('all imgs loaded');
+                        functions.onAllImgsLoaded()
+                    }
+                };
+                img.src = images[i];
+            }// endfor
+        }// preload_images()
+    </script>
+</head>
+<body>
+    @RenderBody();
+    @*@Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)*@
+    @RenderSection("scripts", required: false)
+</body>
+</html>
