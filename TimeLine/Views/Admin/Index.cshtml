@@ -1,75 +1,88 @@
 ﻿@model TimeLine.Models.TimeLineModel
-
 @{
-    Layout = null;
+    Layout = null; 
 }
 
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+    <link rel="stylesheet" href="~/layui/css/layui.css"/>
 </head>
 <body>
-    @using (Html.BeginForm("Create", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-    {
-        @Html.AntiForgeryToken()
-        
-        <div class="form-horizontal">
-            <h4>TimeLineModel</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.TitleYear, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.TitleYear, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.TitleYear, "", new { @class = "text-danger" })
+    
+    <div class="layui-col-md8 layui-col-md-offset2" style="margin-top:50px">
+        <fieldset class="layui-elem-field layui-field-title site-title">
+            <legend><a name="nav-theme">创建历史快照</a></legend>
+        </fieldset>
+        <form class="layui-form" action="Admin/Create" method="post">
+            <div class="layui-form-item">
+                <label class="layui-form-label">快照年份</label>
+                <div class="layui-input-block">
+                    <input type="number" name="year" required lay-verify="required" placeholder="请输入快照年份 如: 2012" autocomplete="off" class="layui-input">
                 </div>
             </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.TitleMonth, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.TitleMonth, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.TitleMonth, "", new { @class = "text-danger" })
+            <div class="layui-form-item">
+                <label class="layui-form-label">快照月份</label>
+                <div class="layui-input-block">
+                    <input type="number" name="month" required lay-verify="required" placeholder="请输入快照月份 如: 12" autocomplete="off" class="layui-input">
                 </div>
             </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.TitleDay, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.TitleDay, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.TitleDay, "", new { @class = "text-danger" })
+            <div class="layui-form-item">
+                <label class="layui-form-label">快照日期</label>
+                <div class="layui-input-block">
+                    <input type="number" name="day" required lay-verify="required" placeholder="请输入快照日期 如: 31" autocomplete="off" class="layui-input">
                 </div>
             </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.Copy, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Copy, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Copy, "", new { @class = "text-danger" })
+            <div class="layui-form-item">
+                <label class="layui-form-label">快照照片</label>
+                <div class="layui-input-block">
+                    <input type="text" readonly="readonly" name="day" required lay-verify="required" placeholder="上传照片地址" autocomplete="off" class="layui-input col-md-10" id="img">
+                    <button type="button" class="layui-btn col-md-2" id="upld">
+                        <i class="layui-icon">&#xe67c;</i>上传图片
+                    </button>
                 </div>
             </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.CreateTime, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.CreateTime, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.CreateTime, "", new { @class = "text-danger" })
+            
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">快照描述</label>
+                <div class="layui-input-block">
+                    <textarea name="desc" placeholder="请输入快照描述" class="layui-textarea"></textarea>
                 </div>
             </div>
-    
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+            <div class="layui-form-item">
+                <label class="layui-form-label">是否启用</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" name="switch" lay-skin="switch">
                 </div>
             </div>
-        </div>
-    }
-    
-    <div>
-        @Html.ActionLink("Back to List", "Index")
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
     </div>
+    <script type="text/javascript" src="~/layui/layui.all.js"></script>
+    <script>
+        layui.use('upload', function(){
+          var upload = layui.upload;
+
+          //执行实例
+          var uploadInst = upload.render({
+              elem: '#upld' //绑定元素
+            ,url: '/upload/' //上传接口
+            ,done: function(res){
+                //上传完毕回调
+                $("#img").val("qqq")
+            }
+            ,error: function(){
+              //请求异常回调
+            }
+          });
+        });
+    </script>
 </body>
 </html>
