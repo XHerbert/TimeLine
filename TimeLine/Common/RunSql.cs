@@ -20,5 +20,7 @@ namespace Cited
         /// 创建目标记录
         /// </summary>
         public const string SQL_INSERT_TARGET_CITED = "INSERT INTO dbo.Table_CitedCrisis ( cited ,crisis_year ,top_crisis_avg ,after_crisis_avg ,after_crisis_total,flag ,create_time) VALUES  ( @cited ,@crisis_year ,@top_crisis_avg ,@after_crisis_avg , @after_crisis_total,@flag ,GETDATE())";
+
+        public const string SQL_INSERT_HISTORY = "INSERT INTO dbo.Table_History (TitleYear, TitleMonth, TitleDay, Copy, Image, CreateTime ,UpdateTime,IsDeleted) VALUES (@TitleYear, @TitleMonth, @TitleDay, @Copy, @Image, @CreateTime ,@UpdateTime,@IsDeleted)";
     }
 }

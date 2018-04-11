@@ -7,17 +7,19 @@ namespace TimeLine.Models
 {
     public class TimeLineModel
     {
-        public int id { get; set; }
-        public string titleYear { get; set; }
-        public string titleMonth { get; set; }
-        public string titleDay { get; set; }
-        public string copy { get; set; }
-        public Img img { get; set; }
-        public DateTime createTime { get; set; }
+        public int Id { get; set; }
+        public string TitleYear { get; set; }
+        public string TitleMonth { get; set; }
+        public string TitleDay { get; set; }
+        public string Copy { get; set; }
+        public images Images { get; set; }
+        public DateTime CreateTime { get; set; }
+        public DateTime UpdateTime { get; set; }
+        public bool IsDeleted { get; set; }
 
     }
 
-    public class Img
+    public class images
     {
         public string src { get; set; }
     }

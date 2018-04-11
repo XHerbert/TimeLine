@@ -25,7 +25,7 @@ function get_chapter_imgs(chapters) {
     var imgs = [];
 
     for(var i=0; i<chapters.length; i++) {
-        imgs.push(chapters[i].img.src);
+        imgs.push(chapters[i].images.src);
     }// endfor
 
     return imgs;

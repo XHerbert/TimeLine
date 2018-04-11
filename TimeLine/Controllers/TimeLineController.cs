@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,23 +17,33 @@ namespace TimeLine.Controllers
             {
                 new TimeLineModel()
                 {
-                    id=0,
-                    titleYear = "2010",
-                    titleMonth="1",
-                    titleDay="2",
-                    copy="2010年，我们......",
-                    img=GetImgsrc("1.jpg")
+                    Id=0,
+                    TitleYear = "2010",
+                    TitleMonth="10",
+                    TitleDay="2",
+                    Copy="2010年，我们......",
+                    Images=GetImgsrc("1942-1000x1670.jpg")
+                },
+                 new TimeLineModel()
+                {
+                    Id=0,
+                    TitleYear = "2012",
+                    TitleMonth="12",
+                    TitleDay="2",
+                    Copy="2012年，我们......",
+                    Images=GetImgsrc("1963.jpg")
                 }
             };
-          
-            
-            return Json(model,JsonRequestBehavior.AllowGet);
+            ViewBag.models = model;
+            ViewBag.json = JsonConvert.SerializeObject(model);
+            return View();
+            //return Json(model,JsonRequestBehavior.AllowGet);
         }
 
-        private Img GetImgsrc(string path)
+        private images GetImgsrc(string path)
         {
-            Img img = new Models.Img();
-            img.src = path;
+            images img = new Models.images();
+            img.src = "/images/"+path;
             return img;
         }
     }

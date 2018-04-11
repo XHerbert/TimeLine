@@ -17,7 +17,8 @@ var History = function($container, options) {
     H.interval = new TimelineMax();
     H.$object = {
         container : $container,
-        headline : $container.find('.chapter-headline'),
+        headline: $container.find('.chapter-headline'),
+        bodyline: $container.find('.chapter-bodyline'),
         copy : $container.find('.chapter-copy'),
         image : $container.find('.chapter-image'),
         timeline: {
@@ -86,15 +87,18 @@ var History = function($container, options) {
 
         var tl = new TimelineMax();
 
-        tl.staggerTo([H.$object.headline, H.$object.image, H.$object.copy], H.options.duration *.25, {autoAlpha: 0},.1);
+        //tl.staggerTo([H.$object.headline, H.$object.image, H.$object.copy], H.options.duration * .25, { autoAlpha: 0 }, .1);
+        tl.staggerTo([H.$object.headline, H.$object.bodyline,H.$object.image, H.$object.copy], H.options.duration * .25, { autoAlpha: 0 }, .1);
         tl.add(function() {
-            H.$object.headline.html(H.options.chapters[ H.options.currentIndex ].title);
+            H.$object.headline.html(H.options.chapters[H.options.currentIndex].title);
+            H.$object.bodyline.html(H.options.chapters[H.options.currentIndex].titleMonth);
             H.$object.copy.html(H.options.chapters[ H.options.currentIndex ].copy);
             H.$object.image.css({
-                'background-image' : 'url(' + H.options.chapters[ H.options.currentIndex ].img.src + ')'
+                'background-image' : 'url(' + H.options.chapters[ H.options.currentIndex ].images.src + ')'
             });
         });
-        tl.staggerTo([H.$object.headline, H.$object.image, H.$object.copy], H.options.duration *.25, {autoAlpha: 1, clearProps:'opacity, visibility'},.1);
+        //tl.staggerTo([H.$object.headline, H.$object.image, H.$object.copy], H.options.duration * .25, { autoAlpha: 1, clearProps: 'opacity, visibility' }, .1);
+        tl.staggerTo([H.$object.headline, H.$object.bodyline,  H.$object.image, H.$object.copy], H.options.duration * .25, { autoAlpha: 1, clearProps: 'opacity, visibility' }, .1);
 
     }// update_chapter()
 
