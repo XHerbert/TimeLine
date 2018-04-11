@@ -18,12 +18,31 @@ namespace TimeLine.Controllers
                 new TimeLineModel()
                 {
                     Id=0,
+                    TitleYear = "2009",
+                    TitleMonth="10",
+                    TitleDay="2",
+                    Copy="2009年，我们......",
+                    Images=GetImgsrc("1942-1000x1670.jpg")
+                },
+                 new TimeLineModel()
+                {
+                    Id=0,
                     TitleYear = "2010",
                     TitleMonth="10",
                     TitleDay="2",
                     Copy="2010年，我们......",
                     Images=GetImgsrc("1942-1000x1670.jpg")
                 },
+                 new TimeLineModel()
+                {
+                    Id=0,
+                    TitleYear = "2011",
+                    TitleMonth="12",
+                    TitleDay="2",
+                    Copy="2011年，我们......",
+                    Images=GetImgsrc("1963.jpg")
+                },
+                
                  new TimeLineModel()
                 {
                     Id=0,

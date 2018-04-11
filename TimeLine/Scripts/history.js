@@ -90,9 +90,9 @@ var History = function($container, options) {
         //tl.staggerTo([H.$object.headline, H.$object.image, H.$object.copy], H.options.duration * .25, { autoAlpha: 0 }, .1);
         tl.staggerTo([H.$object.headline, H.$object.bodyline,H.$object.image, H.$object.copy], H.options.duration * .25, { autoAlpha: 0 }, .1);
         tl.add(function() {
-            H.$object.headline.html(H.options.chapters[H.options.currentIndex].title);
-            H.$object.bodyline.html(H.options.chapters[H.options.currentIndex].titleMonth);
-            H.$object.copy.html(H.options.chapters[ H.options.currentIndex ].copy);
+            H.$object.headline.html(H.options.chapters[H.options.currentIndex].TitleYear);
+            H.$object.bodyline.html(H.options.chapters[H.options.currentIndex].TitleMonth);
+            H.$object.copy.html(H.options.chapters[ H.options.currentIndex ].Copy);
             H.$object.image.css({
                 'background-image' : 'url(' + H.options.chapters[ H.options.currentIndex ].Images.src + ')'
             });
