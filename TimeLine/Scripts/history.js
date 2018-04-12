@@ -94,7 +94,7 @@ var History = function($container, options) {
             H.$object.bodyline.html(H.options.chapters[H.options.currentIndex].TitleMonth);
             H.$object.copy.html(H.options.chapters[ H.options.currentIndex ].Copy);
             H.$object.image.css({
-                'background-image' : 'url(' + H.options.chapters[ H.options.currentIndex ].Images.src + ')'
+                'background-image' : 'url(' + H.options.chapters[ H.options.currentIndex ].Images + ')'
             });
         });
         //tl.staggerTo([H.$object.headline, H.$object.image, H.$object.copy], H.options.duration * .25, { autoAlpha: 1, clearProps: 'opacity, visibility' }, .1);

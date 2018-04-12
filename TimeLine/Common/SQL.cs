@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 using TimeLine.Common;
 using TimeLine.Models;
 
-namespace Cited
+namespace TimeLine
 {
     public class SQL
     {
         //连接数据库
-        public static string GetConnectionString
+        public static string ConnectionString
         {
             get
             {
-                return "server = XUHONGBO;Database = TestDB;uid = sa;pwd = xsw2@wsx";
+                return "server = XUHONGBO;Database = Time;uid = sa;pwd = cde3#edc";
             }
         }
 
@@ -53,7 +53,7 @@ namespace Cited
         /// <returns></returns>
         public static SqlConnection GetConnection()
         {
-            var conn = new SqlConnection(SQL.GetConnectionString);
+            var conn = new SqlConnection(SQL.ConnectionString);
             conn.Open();
             return conn;
         }
@@ -73,16 +73,14 @@ namespace Cited
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    images img = new images();
                     TimeLineModel model = new TimeLineModel();
                     model.Id = Convert.ToInt32(reader[0]);
                     model.TitleYear = reader[1].ToString();
                     model.TitleMonth = reader[2].ToString();
                     model.TitleDay = reader[3].ToString();
                     model.Copy = reader[4].ToString();
-                    img.src = reader[5].ToString();
+                    model.Images = reader[5].ToString();
                     model.CreateTime = Convert.ToDateTime(reader[6]);
-                    model.Images = img;
                     model.UpdateTime = Convert.ToDateTime(reader[7]);
                     model.IsDeleted = Convert.ToBoolean(reader[8]);
                     lines.Add(model);

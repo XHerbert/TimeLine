@@ -16,45 +16,48 @@
         <fieldset class="layui-elem-field layui-field-title site-title">
             <legend><a name="nav-theme">创建历史快照</a></legend>
         </fieldset>
-        <form class="layui-form" action="Admin/Create" method="post">
+        <form class="layui-form" action="/Admin/Create" method="post">
             <div class="layui-form-item">
                 <label class="layui-form-label">快照年份</label>
                 <div class="layui-input-block">
-                    <input type="number" name="year" required lay-verify="required" placeholder="请输入快照年份 如: 2012" autocomplete="off" class="layui-input">
+                    <input type="number" name="TitleYear" required min="1989" lay-verify="required" placeholder="请输入快照年份 如: 2012" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">快照月份</label>
                 <div class="layui-input-block">
-                    <input type="number" name="month" required lay-verify="required" placeholder="请输入快照月份 如: 12" autocomplete="off" class="layui-input">
+                    <input type="number" name="TitleMonth" required min="1" max="12" lay-verify="required" placeholder="请输入快照月份 如: 12" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">快照日期</label>
                 <div class="layui-input-block">
-                    <input type="number" name="day" required lay-verify="required" placeholder="请输入快照日期 如: 31" autocomplete="off" class="layui-input">
+                    <input type="number" name="TitleDay" required min="1" max="31" lay-verify="required" placeholder="请输入快照日期 如: 31" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">快照照片</label>
                 <div class="layui-input-block">
-                    <input type="text" readonly="readonly" name="day" required lay-verify="required" placeholder="上传照片地址" autocomplete="off" class="layui-input col-md-10" id="img">
-                    <button type="button" class="layui-btn col-md-2" id="upld">
-                        <i class="layui-icon">&#xe67c;</i>上传图片
+                    <input type="text" readonly="readonly" name="Images" required lay-verify="required" placeholder="上传照片地址" autocomplete="off" class="layui-input col-md-10" id="img">
+                </div>
+            </div>
+            <div class="layui-form-item col-md-4 col-md-offset-10">
+                <div class="layui-input-block">
+                    <button type="button" class="layui-btn" id="upld">
+                        <i class="layui-icon">&#xe67c;</i>上传照片
                     </button>
                 </div>
             </div>
-            
             <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">快照描述</label>
+                <label class="layui-form-label">照片描述</label>
                 <div class="layui-input-block">
-                    <textarea name="desc" placeholder="请输入快照描述" class="layui-textarea"></textarea>
+                    <textarea name="Copy" placeholder="请输入照片描述" class="layui-textarea"></textarea>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">是否启用</label>
                 <div class="layui-input-block">
-                    <input type="checkbox" name="switch" lay-skin="switch">
+                    <input type="checkbox" name="IsDeleted" lay-skin="switch">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -65,6 +68,7 @@
             </div>
         </form>
     </div>
+    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.js"></script>
     <script type="text/javascript" src="~/layui/layui.all.js"></script>
     <script>
         layui.use('upload', function(){
@@ -72,13 +76,13 @@
 
           //执行实例
           var uploadInst = upload.render({
-              elem: '#upld' //绑定元素
-            ,url: '/upload/' //上传接口
-            ,done: function(res){
+              elem: '#upld', //绑定元素
+              url: '/Admin/UploadImage',//上传接口
+              done: function(res){
                 //上传完毕回调
-                $("#img").val("qqq")
-            }
-            ,error: function(){
+                  $("#img").val("qqq");
+              },
+             error: function(){
               //请求异常回调
             }
           });

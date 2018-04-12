@@ -59,11 +59,9 @@ namespace TimeLine.Controllers
             //return Json(model,JsonRequestBehavior.AllowGet);
         }
 
-        private images GetImgsrc(string path)
+        private string GetImgsrc(string path)
         {
-            images img = new Models.images();
-            img.src = "/images/"+path;
-            return img;
+            return "/images/" +path;
         }
     }
 }
