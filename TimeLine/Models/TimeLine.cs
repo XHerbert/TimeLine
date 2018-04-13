@@ -7,7 +7,7 @@ using System.Web;
 
 namespace TimeLine.Models
 {
-    [Table("Time.Table_History")]
+    [Table("Table_History")]
     public class TimeLineModel
     {
         [Key]
@@ -17,9 +17,9 @@ namespace TimeLine.Models
         public string TitleDay { get; set; }
         public string Copy { get; set; }
         public string Images { get; set; }
-        public DateTime CreateTime { get; set; }
-        public DateTime UpdateTime { get; set; }
-        public bool IsDeleted { get; set; }
+        public DateTime CreateTime { get; set; } = DateTime.Now;
+        public DateTime UpdateTime { get; set; } = DateTime.Now;
+        public bool IsDeleted { get; set; } = false;
 
     }
 

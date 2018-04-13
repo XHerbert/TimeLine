@@ -17,19 +17,12 @@ namespace TimeLine
         {
             get
             {
-                return "server = XUHONGBO;Database = Time;uid = sa;pwd = cde3#edc";
+                string name = Environment.MachineName;
+                return System.Configuration.ConfigurationManager.ConnectionStrings[name].ToString(); 
             }
         }
 
-        public static string GetBaseTable
-        {
-            get
-            {
-                return Config.GetConfig("Table");
-            }
-        }
-
-       
+               
         /// <summary>
         /// 测试数据库连接
         /// </summary>
@@ -90,7 +83,7 @@ namespace TimeLine
         }
 
         /// <summary>
-        /// 创建计算结果
+        /// 创建记录
         /// </summary>
         /// <param name="stroredCited"></param>
         public static void AddCitedModel(TimeLineModel timeLineModel)

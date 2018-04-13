@@ -8,7 +8,8 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
-    <link rel="stylesheet" href="~/layui/css/layui.css"/>
+    <link rel="stylesheet" href="~/Scripts/layui/css/layui.css"/>
+    <link href="~/Scripts/layui/css/modules/layer/default/layer.css" rel="stylesheet" />
 </head>
 <body>
     
@@ -62,31 +63,33 @@
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                    <button class="layui-btn" lay-submit lay-filter="formDemo" id="submitBtn">立即提交</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>
         </form>
     </div>
-    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.js"></script>
-    <script type="text/javascript" src="~/layui/layui.all.js"></script>
-    <script>
-        layui.use('upload', function(){
-          var upload = layui.upload;
 
-          //执行实例
-          var uploadInst = upload.render({
-              elem: '#upld', //绑定元素
-              url: '/Admin/UploadImage',//上传接口
-              done: function(res){
-                //上传完毕回调
-                  $("#img").val("qqq");
-              },
-             error: function(){
-              //请求异常回调
-            }
-          });
-        });
-    </script>
+    <div id="particles-js"></div>
+    <style type="text/css">
+           #particles-js {
+                position: absolute;
+                top: 0;
+                width: 100%;
+        }
+
+    </style>
+    <style type="text/css">
+           #particles-js {
+                z-index: -1;
+                position: absolute;
+                top: 0;
+                width: 100%;
+                background: #eee;
+        }
+    </style>
+    <script type="text/javascript" data-main="./Scripts/layui/app" src="~/Scripts/require.js"></script>
+    <script src="~/Scripts/lib/particles.min.js"></script>
+    <script src="~/Scripts/lib/particlesJS.js"></script>
 </body>
 </html>

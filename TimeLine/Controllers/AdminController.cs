@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -12,6 +14,15 @@ namespace TimeLine.Controllers
 
     public class AdminController : Controller
     {
+        static AdminController()
+        {
+            using (var db = new TimeLineDb())
+            {
+                var success = db.Database.CreateIfNotExists();
+                Debug.WriteLine(success);
+            };
+            //Database.SetInitializer(new Initializer());
+        }
 
         // GET: Admin
         public ActionResult Index()
@@ -33,7 +44,6 @@ namespace TimeLine.Controllers
                     newModel.UpdateTime = DateTime.Now;
                     newModel.IsDeleted = false;
                     newModel.Images = "1234.jpg";
-                    dbContext.Entry<TimeLineModel>(newModel).State = System.Data.Entity.EntityState.Added;
                     dbContext.timeLineModels.Add(newModel);                
                     int ret = dbContext.SaveChanges();
                     if (ret > 0)
