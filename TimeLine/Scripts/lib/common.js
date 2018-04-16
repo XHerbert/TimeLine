@@ -1,7 +1,7 @@
 ﻿//模块化
 define(["jquery"],function (jquery) {
     var module = {};
-    var moduleName = "app";
+    var moduleName = "common";
     var moduleVersion = "1.0.1";
     var $ = jquery;
    

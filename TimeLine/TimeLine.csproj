@@ -204,6 +204,7 @@
     <Compile Include="Common\SQL.cs" />
     <Compile Include="Common\TimeLineDb.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AjaxAdminController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -223,6 +224,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\history.css" />
+    <Content Include="Content\particlesjs.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -236,7 +238,6 @@
     <Content Include="images\foto6-1000x625.jpg" />
     <Content Include="images\foto8-1000x682.jpg" />
     <Content Include="Scripts\layer.js" />
-    <Content Include="Scripts\layui\alert.js" />
     <Content Include="Scripts\layui\app.js" />
     <Content Include="Scripts\layui\css\layui.css" />
     <Content Include="Scripts\layui\css\layui.mobile.css" />
@@ -361,7 +362,9 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\layui\renderlist.js" />
     <Content Include="Scripts\lib\common.js" />
+    <Content Include="Scripts\lib\datefmt.js" />
     <Content Include="Scripts\lib\particlesJS.js" />
     <Content Include="Scripts\lodash.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
@@ -409,6 +412,7 @@
     <Content Include="Views\TimeLine\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Scripts\lib\particles.min.js" />
+    <Content Include="Views\Admin\LineList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

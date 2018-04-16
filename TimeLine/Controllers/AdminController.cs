@@ -1,10 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Diagnostics;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using TimeLine.Common;
 using TimeLine.Models;
@@ -12,72 +9,26 @@ using TimeLine.Models;
 namespace TimeLine.Controllers
 {
 
-    public class AdminController : Controller
+    public partial class AdminController : Controller
     {
         static AdminController()
         {
-            using (var db = new TimeLineDb())
-            {
-                var success = db.Database.CreateIfNotExists();
-                Debug.WriteLine(success);
-            };
+            //using (var db = new TimeLineDb())
+            //{
+            //    var success = db.Database.CreateIfNotExists();
+            //    Debug.WriteLine(success);
+            //};
             //Database.SetInitializer(new Initializer());
         }
 
-        // GET: Admin
         public ActionResult Index()
         {
-
             return View();
         }
 
-        public ActionResult Create(TimeLineModel model)
+        public ActionResult LineList()
         {
-            ApiResult<bool> result = new ApiResult<bool>();
-            //编写创建model逻辑
-            using (var dbContext = new TimeLineDb())
-            {
-                TimeLineModel newModel = model;
-                try
-                {
-                    newModel.CreateTime = DateTime.Now;
-                    newModel.UpdateTime = DateTime.Now;
-                    newModel.IsDeleted = false;
-                    newModel.Images = "1234.jpg";
-                    dbContext.timeLineModels.Add(newModel);                
-                    int ret = dbContext.SaveChanges();
-                    if (ret > 0)
-                    {
-                        result.Code = 10000;
-                        result.Data = true;
-                        result.IsSuccess = true;
-                    }
-                    else
-                    {
-                        result.Code = 20000;
-                        result.Data = false;
-                        result.IsSuccess = false;
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.Write(e.Message);
-                }
-            }
-            return Json(result, JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult UploadImage(string src)
-        {
-            ApiResult<string> result = new ApiResult<string>();
-            //编写创建model逻辑
-
-
-            result.Code = 200;
-            result.Data = src;
-            result.IsSuccess = true;
-
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return View();
         }
     }
 
@@ -92,5 +43,13 @@ namespace TimeLine.Controllers
         {
             return JsonConvert.SerializeObject(this);
         }
+    }
+
+    public class LayUIResult<T>
+    {
+        public int code { get; set; }
+        public string msg { get; set; }
+        public int count { get; set; }
+        public List<T> data { get; set; }
     }
 }
