@@ -101,9 +101,14 @@ require(["jquery", "layui", "layer", "common", "deleterecord"], function ($, lay
                 var tr = obj.tr; //获得当前行 tr 的DOM对象
 
                 if (layEvent === 'detail') { //查看
-                    layer.msg("detail");
+                    //layer.msg("detail");
+                    layer.open({
+                        type: 1,
+                        content: ['http://www.baidu.com','no']
+                    });
+
                 } else if (layEvent === 'del') { //删除
-                    layer.confirm('真的删除行么', function (index) {
+                    layer.confirm('确定删除当前记录么？', function (index) {
                         obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
                         layer.close(index);
                         //向服务端发送删除指令
@@ -111,7 +116,11 @@ require(["jquery", "layui", "layer", "common", "deleterecord"], function ($, lay
                     });
                 } else if (layEvent === 'edit') { //编辑
 
-                    layer.msg("edit");
+                    layer.open({
+                        type: 1,
+                        content: ['http://www.baidu.com', 'no']
+                    });
+
                     //同步更新缓存对应的值
                     obj.update({
                         username: '123'
