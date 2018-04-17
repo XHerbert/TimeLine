@@ -2004,6 +2004,7 @@ var requirejs, require, define;
     }
 
     //Look for a data-main script attribute, which could also adjust the baseUrl.
+    //查找【data-main】标签属性，该属性同样会调整【baseURL】
     if (isBrowser && !cfg.skipDataMain) {
         //Figure out baseUrl. Get it from the script tag with require.js in it.
         eachReverse(scripts(), function (script) {

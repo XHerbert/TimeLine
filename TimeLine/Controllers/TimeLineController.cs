@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using TimeLine.Common;
 using TimeLine.Models;
@@ -17,7 +15,7 @@ namespace TimeLine.Controllers
             List<TimeLineModel> model = new List<TimeLineModel>();
             using (var db = new TimeLineDb())
             {
-               model =  db.timeLineModels.ToList<TimeLine.Models.TimeLineModel>();
+               model =  db.timeLineModels.Where(p=>p.IsDeleted==false).OrderByDescending(o=>o.Id).ToList<TimeLine.Models.TimeLineModel>();
             }
             
             ViewBag.models = model;

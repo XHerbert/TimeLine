@@ -18,7 +18,7 @@ namespace TimeLine.Controllers
             using (var db = new TimeLineDb())
             {
 
-                list = db.timeLineModels.OrderByDescending(p => p.CreateTime).ToList();
+                list = db.timeLineModels.Where(i=>i.IsDeleted==false).OrderByDescending(p => p.CreateTime).ToList();
                 if (list != null && list.Count > 0)
                 {
                     result = new LayUIResult<TimeLineModel>();
@@ -105,6 +105,35 @@ namespace TimeLine.Controllers
                 result.IsSuccess = false;
             }
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            ApiResult<bool> result = new ApiResult<bool>();
+            int ret = 0;
+            using (var db = new TimeLineDb())
+            {
+                var model = db.timeLineModels.Where(p=>p.Id == id).First();
+                if (model != null)
+                {
+                    model.IsDeleted = true;
+                    model.UpdateTime = DateTime.Now;
+                    db.Entry(model).State = System.Data.Entity.EntityState.Modified;
+                    ret = db.SaveChanges();
+                }
+            }
+            if (ret > 0)
+            {
+                result.Code = 200;
+                result.Data = true;
+                result.IsSuccess = true;
+            }else
+            {
+                result.Code = 500;
+                result.Data = false;
+                result.IsSuccess = false;
+            }
+            return Json(result);
         }
     }
 }

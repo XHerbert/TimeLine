@@ -4,8 +4,6 @@ define(["jquery"],function (jquery) {
     var moduleName = "common";
     var moduleVersion = "1.0.1";
     var $ = jquery;
-   
-
     var ajax = function (url,data,type,successCallBack,errorCallBack) {
         $.ajax({
             async:true,
@@ -13,16 +11,21 @@ define(["jquery"],function (jquery) {
             data: data,
             dataType:"json",
             type:type,
-            success:function(result){
-                successCallBack();
+            success: function (result) {
+                if (result && successCallBack!=null) {
+                    successCallBack();
+                }
             },
-            error:function(error){
-                errorCallBack();
+            error: function (error) {
+                if (errorCallBack != null) {
+                    errorCallBack();
+                }
             }
         });
     };
     module.ajax = ajax;
     module.version = moduleVersion;
     module.name = moduleName;
+    module.$ = $;
     return module;
 });

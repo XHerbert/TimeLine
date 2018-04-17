@@ -229,16 +229,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="images\1942-1000x1670.jpg" />
-    <Content Include="images\1942-1000x670.jpg" />
-    <Content Include="images\1963.jpg" />
-    <Content Include="images\FOTO1.jpg" />
-    <Content Include="images\FOTO2-1000x677.jpg" />
-    <Content Include="images\Foto5-1000x608.jpg" />
-    <Content Include="images\foto6-1000x625.jpg" />
-    <Content Include="images\foto8-1000x682.jpg" />
+    <Content Include="Scripts\app.js" />
     <Content Include="Scripts\layer.js" />
-    <Content Include="Scripts\layui\app.js" />
+    <Content Include="Scripts\layui\appbk.js" />
     <Content Include="Scripts\layui\css\layui.css" />
     <Content Include="Scripts\layui\css\layui.mobile.css" />
     <Content Include="Scripts\layui\css\modules\code.css" />
@@ -365,12 +358,14 @@
     <Content Include="Scripts\layui\renderlist.js" />
     <Content Include="Scripts\lib\common.js" />
     <Content Include="Scripts\lib\datefmt.js" />
+    <Content Include="Scripts\lib\deleterecord.js" />
     <Content Include="Scripts\lib\particlesJS.js" />
     <Content Include="Scripts\lodash.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\namespaces.js" />
     <Content Include="Scripts\page_about.js" />
     <Content Include="Scripts\require.js" />
+    <Content Include="Scripts\requireconfig.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\TweenMax.min.js" />
@@ -416,6 +411,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
