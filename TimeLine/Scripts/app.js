@@ -1,4 +1,4 @@
-﻿//////
+﻿//////加载JS
 require.config({
     //baseUrl: 'http://localhost:810/Scripts',
     paths: {
@@ -20,15 +20,13 @@ require.config({
     }
 });
 
-//////
+//////核心类库
 require(["jquery", "layui", "layer", "common", "deleterecord"], function ($, layui, layer, common, _) {
     var layui = layui;
     var layer = layer;
     var common = common;
     var $ = $ || {};
     var del = _;
-    layer.msg(_.commonVer);
-    //alert(layer);
     var app = function () { };
     //定义函数功能
     app.prototype.pageLoad = function () {
@@ -157,20 +155,26 @@ require(["jquery", "layui", "layer", "common", "deleterecord"], function ($, lay
         });
     };
 
+    //发布成功回调
     app.prototype.successCallBack = function () {
         var $this = this;
         $this.layer.msg("发布成功", { time: 3000, icon: 6 });
-        window.location = "/Admin/LineList";
+        setTimeout(function () {
+            window.location = "/Admin/LineList";
+        }, 3000);
     },
 
+    //删除成功回调
     app.prototype.successDeleteCallBack = function () {
         layer.msg("删除成功", { time: 3000, icon: 6 });
     }
 
+    //发生错误回调
     app.prototype.errorCallBack = function (err) {
 
     },
 
+    //删除记录
     app.prototype.delete = function (id) {
         var $this = this;
         var data = {};
@@ -181,9 +185,6 @@ require(["jquery", "layui", "layer", "common", "deleterecord"], function ($, lay
         //发送请求
         common.ajax(data.url, data.data, data.type, data.successCallBack, null);
     }
+
     app.prototype.pageLoad();
 });
-
-
-require(["deleterecord"]);
-

@@ -9,7 +9,6 @@ namespace TimeLine.Controllers
 {
     public class TimeLineController : Controller
     {
-        // GET: TimeLine
         public ActionResult Index()
         {
             List<TimeLineModel> model = new List<TimeLineModel>();
