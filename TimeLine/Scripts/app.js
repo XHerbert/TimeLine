@@ -27,7 +27,9 @@ require(["jquery", "layui", "layer", "common", "deleterecord"], function ($, lay
     var common = common;
     var $ = $ || {};
     var del = _;
+    var tmp = {};
     var app = function () { };
+    //app.prototype.tmp = {},
     //定义函数功能
     app.prototype.pageLoad = function () {
         var $this = this;
@@ -46,24 +48,35 @@ require(["jquery", "layui", "layer", "common", "deleterecord"], function ($, lay
 
         });
 
+        $("#submitUpdate").bind("click", function () {
+            var data = {};
+            data.data = $("form").serialize();
+            data.url = "/Admin/Update";
+            data.type = "POST",
+            data.successCallBack = $this.successUpdateCallBack;
+            data.errorCallBack = $this.errorCallBack;
+            //发送请求
+            common.ajax(data.url, data.data, data.type, data.successCallBack, data.errorCallBack);
+        });
+
         //加载列表数据并绑定操作事件
         layui.use('table', function () {
             var table = layui.table;
             table.render({
                 elem: '#dataTable'
-              , height: 'full-50'
+              , height: 'full-100'
               , skin: 'nob'
               , even: true
               , url: '/Admin/AjaxLineList'
               , loading: true
               , page: true
               , cols: [[
-                { field: 'Id', title: 'Id', sort: true, width: 80, templet: function (d) { return d.Id }, fixed: 'left' }
-                , { field: 'TitleYear', title: '年', width: 80, sort: true }
-                , { field: 'TitleMonth', title: '月', width: 80 }
-                , { field: 'TitleDay', title: '日', width: 80 }
+                  { field: 'Id', title: 'Id', sort: true, width: 80, fixed: 'left' }
+                , { field: 'TitleYear', title: '年',  width: 80,  sort: true}
+                , { field: 'TitleMonth', title: '月', width: 50}
+                , { field: 'TitleDay', title: '日',width: 50 }
                 , { field: 'Copy', title: '背景' }
-                , { field: 'Images', title: '地址', width: 400 }
+                , { field: 'Images', title: '地址', minWidth: 380 }
                 , {
                     field: 'CreateTime', title: '创建时间', width: 180,
                     templet: function (d) {
@@ -83,7 +96,7 @@ require(["jquery", "layui", "layer", "common", "deleterecord"], function ($, lay
                     }
                 }
                 , {
-                    field: 'IsDeleted', title: '有效', width: 80,
+                    field: 'IsDeleted', title: '有效', width: 60,
                     templet: function (d) {
                         if (d.IsDeleted == true) {
                             return '无效'
@@ -92,7 +105,7 @@ require(["jquery", "layui", "layer", "common", "deleterecord"], function ($, lay
                         }
                     }, style: "color:#5FB878 ;"
                 },
-                { fixed: 'right', title: "操作", width: 250, align: 'center', toolbar: '#toolbar' }
+                { fixed: 'right', title: "操作", align: 'center', toolbar: '#toolbar', width: 190 }
               ]]
             });
             table.on('tool(dataTb)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
@@ -103,8 +116,13 @@ require(["jquery", "layui", "layer", "common", "deleterecord"], function ($, lay
                 if (layEvent === 'detail') { //查看
                     //layer.msg("detail");
                     layer.open({
-                        type: 1,
-                        content: ['http://www.baidu.com','no']
+                        type: 2,
+                        title: false,
+                        skin: 'layui-layer-rim',
+                        area: ['503px', '332px'],
+                        shade: 0.5,
+                        closeBtn: 1,
+                        content: [data.Images,'no']
                     });
 
                 } else if (layEvent === 'del') { //删除
@@ -115,17 +133,29 @@ require(["jquery", "layui", "layer", "common", "deleterecord"], function ($, lay
                         $this.delete(data.Id);
                     });
                 } else if (layEvent === 'edit') { //编辑
-
-                    layer.open({
-                        type: 1,
-                        content: ['http://www.baidu.com', 'no']
+                    var idx = layer.open({
+                        type: 2,
+                        title: "修改快照",
+                        skin: 'layui-layer-rim',
+                        area: ['1240px', '693px'],
+                        shade: 0.5,
+                        fixed:false,
+                        maxmin:true,
+                        content: ['/Admin/Edit?id='+data.Id, 'no']
                     });
-
+                    
                     //同步更新缓存对应的值
-                    obj.update({
-                        username: '123'
-                      , title: 'xxx'
-                    });
+                    //obj.update({
+                    //    TitleYear:  '2222',
+                    //    TitleMonth:  tmp.TitleMonth,
+                    //    TitleDay:  tmp.TitleDay,
+                    //    Copy:  tmp.Copy,
+                    //    Images:  tmp.Images,
+                    //    CreateTime: tmp.CreateTime,
+                    //    UpdateTime: tmp.UpdateTime
+                    //});
+                    //还原对象
+                    tmp = {};
                 }
             });
         });
@@ -178,6 +208,25 @@ require(["jquery", "layui", "layer", "common", "deleterecord"], function ($, lay
         layer.msg("删除成功", { time: 3000, icon: 6 });
     }
 
+    //更新成功回调
+    app.prototype.successUpdateCallBack = function (result) {
+        var $this = this;
+        if (result.Code == 200) {
+            tmp.TitleYear  = result.Data.TitleYear;
+            tmp.TitleMonth = result.Data.TitleMonth;
+            tmp.TitleDay = result.Data.TitleDay;
+            tmp.Images = result.Data.Images;
+            tmp.CreateTime = result.Data.CreateTime;
+            tmp.Copy = result.Data.Copy;
+            tmp.UpdateTime = result.Data.UpdateTime;
+            $this.layer.msg("修改成功", { time: 3000, icon: 6 });
+            setTimeout(function () {
+                var idx = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(idx);
+            }, 3000);
+        }
+    },
+
     //发生错误回调
     app.prototype.errorCallBack = function (err) {
 
@@ -195,5 +244,6 @@ require(["jquery", "layui", "layer", "common", "deleterecord"], function ($, lay
         common.ajax(data.url, data.data, data.type, data.successCallBack, null);
     }
 
+    //载入页面
     app.prototype.pageLoad();
 });

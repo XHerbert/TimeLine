@@ -1,0 +1,89 @@
+﻿@using TimeLine.Models
+@model TimeLineModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>修改快照</title>
+    <link rel="stylesheet" href="~/Scripts/layui/css/layui.css" />
+    <link href="~/Scripts/layui/css/modules/layer/default/layer.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="layui-col-md8 layui-col-md-offset2" style="margin-top:50px">
+        <fieldset class="layui-elem-field layui-field-title site-title">
+            <legend><a name="nav-theme">修改历史快照</a></legend>
+        </fieldset>
+        <form class="layui-form" id="targetForm" onsubmit="return false" action="##">
+            <input type="hidden" name="Id" value="@Model.Id" />
+            <div class="layui-form-item">
+                <label class="layui-form-label">选择日期</label>
+                <div class="layui-input-block">
+                    <input type="text" placeholder="请输入日期 如：2012-12-31" lay-verify="required" class="layui-input" id="date">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">快照年份</label>
+                <div class="layui-input-block">
+                    <input type="text" value="@Model.TitleYear" name="TitleYear" readonly="readonly" lay-verify="required" placeholder="请输入快照年份 如: 2012" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">快照月份</label>
+                <div class="layui-input-block">
+                    <input type="text" value="@Model.TitleMonth" name="TitleMonth" required lay-verify="required" readonly="readonly" placeholder="请输入快照月份 如: 12" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">快照日期</label>
+                <div class="layui-input-block">
+                    <input type="text" value="@Model.TitleDay" name="TitleDay" required lay-verify="required" readonly="readonly" placeholder="请输入快照日期 如: 31" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">快照照片</label>
+                <div class="layui-input-block">
+                    <input type="text" value="@Model.Images" name="Images" required lay-verify="required" readonly="readonly" placeholder="上传照片地址" autocomplete="off" class="layui-input col-md-10" id="img">
+                </div>
+            </div>
+            <div class="layui-form-item col-md-4 col-md-offset-10">
+                <div class="layui-input-block">
+                    <button type="button" class="layui-btn" id="upld">
+                        <i class="layui-icon">&#xe67c;</i>上传照片
+                    </button>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">照片描述</label>
+                <div class="layui-input-block">
+                    <textarea name="Copy" placeholder="请输入照片描述" required lay-verify="required" class="layui-textarea">@Model.Copy</textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">是否启用</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" name="IsDeleted" lay-skin="switch" lay-text="有效|无效" value="1" checked>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" id="submitUpdate">提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div id="particles-js"></div>
+    <link href="~/Content/particlesjs.css" rel="stylesheet" />
+    <script src="~/Scripts/lib/particles.min.js"></script>
+    <script src="~/Scripts/lib/particlesJS.js"></script>
+    <script src="~/Scripts/require.js" data-main="/Scripts/app"></script>
+    <script type="text/javascript">
+        var index = parent.layer.getFrameIndex(window.name);
+    </script>
+</body>
+</html>

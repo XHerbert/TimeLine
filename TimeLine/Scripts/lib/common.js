@@ -12,13 +12,13 @@ define(["jquery"],function (jquery) {
             dataType:"json",
             type:type,
             success: function (result) {
-                if (result && successCallBack!=null) {
-                    successCallBack();
+                if (result && successCallBack!=null && typeof(successCallBack)==="function") {
+                    successCallBack(result);
                 }
             },
             error: function (error) {
-                if (errorCallBack != null) {
-                    errorCallBack();
+                if (errorCallBack != null && typeof (errorCallBack) === "function") {
+                    errorCallBack(error);
                 }
             }
         });

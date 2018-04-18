@@ -11,7 +11,7 @@ namespace TimeLine.Controllers
 {
     public partial class AdminController : Controller
     {
-        public ActionResult AjaxLineList()
+        public ActionResult AjaxLineList(int page =1,int limit=10)
         {
             var list = new List<TimeLineModel>();
             LayUIResult<TimeLineModel> result = null;
@@ -19,13 +19,14 @@ namespace TimeLine.Controllers
             {
 
                 list = db.timeLineModels.Where(i=>i.IsDeleted==false).OrderByDescending(p => p.CreateTime).ToList();
+                var currentlist = list.Skip(((page-1) * limit)).Take(limit).ToList();
                 if (list != null && list.Count > 0)
                 {
                     result = new LayUIResult<TimeLineModel>();
                     result.code = 0;
                     result.msg = "请求成功";
                     result.count = list.Count;
-                    result.data = list;
+                    result.data = currentlist;
                 }
             }
             return Json(result, JsonRequestBehavior.AllowGet);
@@ -65,6 +66,7 @@ namespace TimeLine.Controllers
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult UploadImage()
         {
             ApiResult<string> result = new ApiResult<string>();
@@ -134,6 +136,33 @@ namespace TimeLine.Controllers
                 result.IsSuccess = false;
             }
             return Json(result);
+        }
+
+        public ActionResult Update(TimeLineModel model)
+        {
+            ApiResult<TimeLineModel> result = new ApiResult<TimeLineModel>();
+            using (var db = new TimeLineDb())
+            {
+                var dbmodel = db.timeLineModels.Where(p => p.Id == model.Id).First();
+                if (dbmodel != null)
+                {
+                    dbmodel.Copy = model.Copy;
+                    dbmodel.Images = model.Images;
+                    dbmodel.TitleYear = model.TitleYear;
+                    dbmodel.TitleMonth = model.TitleMonth;
+                    dbmodel.TitleDay = model.TitleDay;
+                    dbmodel.UpdateTime = DateTime.Now;
+                }
+                db.Entry(dbmodel).State = System.Data.Entity.EntityState.Modified;
+                var ret = db.SaveChanges();
+                if (ret > 0)
+                {
+                    result.Code = 200;
+                    result.Data = dbmodel;
+                    result.IsSuccess = true;
+                }
+                return Json(result);
+            }
         }
     }
 }

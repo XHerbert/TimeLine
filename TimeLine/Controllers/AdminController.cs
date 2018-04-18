@@ -30,6 +30,20 @@ namespace TimeLine.Controllers
         {
             return View();
         }
+
+        public ActionResult Edit(int id)
+        {
+            TimeLineModel model = new TimeLineModel();
+            using (var db = new TimeLineDb())
+            {
+                var findModel = db.timeLineModels.Where(p => p.Id == id).First();
+                if (findModel != null)
+                {
+                    model = findModel;
+                }
+            }
+            return View(model);
+        }
     }
 
     public class ApiResult<T>
@@ -38,6 +52,12 @@ namespace TimeLine.Controllers
         public T Data { get; set; }
 
         public int Code { get; set; }
+
+        public ApiResult()
+        {
+            this.Code = 500;
+            this.IsSuccess = false;
+        }
 
         public override string ToString()
         {
