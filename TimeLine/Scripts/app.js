@@ -29,7 +29,6 @@ require(["jquery", "layui", "layer", "common", "deleterecord"], function ($, lay
     var del = _;
     var tmp = {};
     var app = function () { };
-    //app.prototype.tmp = {},
     //定义函数功能
     app.prototype.pageLoad = function () {
         var $this = this;
@@ -212,18 +211,24 @@ require(["jquery", "layui", "layer", "common", "deleterecord"], function ($, lay
     app.prototype.successUpdateCallBack = function (result) {
         var $this = this;
         if (result.Code == 200) {
-            tmp.TitleYear  = result.Data.TitleYear;
-            tmp.TitleMonth = result.Data.TitleMonth;
-            tmp.TitleDay = result.Data.TitleDay;
-            tmp.Images = result.Data.Images;
-            tmp.CreateTime = result.Data.CreateTime;
-            tmp.Copy = result.Data.Copy;
-            tmp.UpdateTime = result.Data.UpdateTime;
+            //tmp.TitleYear  = result.Data.TitleYear;
+            //tmp.TitleMonth = result.Data.TitleMonth;
+            //tmp.TitleDay = result.Data.TitleDay;
+            //tmp.Images = result.Data.Images;
+            //tmp.CreateTime = result.Data.CreateTime;
+            //tmp.Copy = result.Data.Copy;
+            //tmp.UpdateTime = result.Data.UpdateTime;
             $this.layer.msg("修改成功", { time: 3000, icon: 6 });
             setTimeout(function () {
                 var idx = parent.layer.getFrameIndex(window.name);
                 parent.layer.close(idx);
             }, 3000);
+            setTimeout(function () {
+                parent.window.location = "/Admin/LineList";
+            },400);
+        }
+        else {
+            $this.layer.msg("修改失败", { time: 3000, icon: 5 });
         }
     },
 

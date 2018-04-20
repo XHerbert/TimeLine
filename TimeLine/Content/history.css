@@ -246,3 +246,6 @@ p.s-text, .wysiwyg ul.s-text, .maps-list-item .openhours p, .maps-list-item .ope
     height: 8px;
     background: white;
 }
+.chapter-bodyline{
+    /*height:100px;*/
+}

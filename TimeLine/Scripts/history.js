@@ -18,6 +18,7 @@ var History = function($container, options) {
     H.$object = {
         container : $container,
         headline: $container.find('.chapter-headline'),
+        dateline: $container.find('.chapter-date'),//##
         bodyline: $container.find('.chapter-bodyline'),
         copy : $container.find('.chapter-copy'),
         image : $container.find('.chapter-image'),
@@ -88,9 +89,10 @@ var History = function($container, options) {
         var tl = new TimelineMax();
 
         //tl.staggerTo([H.$object.headline, H.$object.image, H.$object.copy], H.options.duration * .25, { autoAlpha: 0 }, .1);
-        tl.staggerTo([H.$object.headline, H.$object.bodyline,H.$object.image, H.$object.copy], H.options.duration * .25, { autoAlpha: 0 }, .1);
+        tl.staggerTo([H.$object.headline, H.$object.dateline , H.$object.bodyline, H.$object.image, H.$object.copy], H.options.duration * .25, { autoAlpha: 0 }, .1);
         tl.add(function() {
             H.$object.headline.html(H.options.chapters[H.options.currentIndex].TitleYear);
+            H.$object.dateline.html(H.options.chapters[H.options.currentIndex].TitleMonth + "." + H.options.chapters[H.options.currentIndex].TitleDay);
             H.$object.bodyline.html(H.options.chapters[H.options.currentIndex].TitleMonth);
             H.$object.copy.html(H.options.chapters[ H.options.currentIndex ].Copy);
             H.$object.image.css({
@@ -98,7 +100,7 @@ var History = function($container, options) {
             });
         });
         //tl.staggerTo([H.$object.headline, H.$object.image, H.$object.copy], H.options.duration * .25, { autoAlpha: 1, clearProps: 'opacity, visibility' }, .1);
-        tl.staggerTo([H.$object.headline, H.$object.bodyline,  H.$object.image, H.$object.copy], H.options.duration * .25, { autoAlpha: 1, clearProps: 'opacity, visibility' }, .1);
+        tl.staggerTo([H.$object.headline, H.$object.dateline, H.$object.bodyline, H.$object.image, H.$object.copy], H.options.duration * .25, { autoAlpha: 1, clearProps: 'opacity, visibility' }, .1);
 
     }// update_chapter()
 
